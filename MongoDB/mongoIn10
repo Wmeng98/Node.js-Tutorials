@@ -1,0 +1,123 @@
+Node.js MongoDB tutorial with Examples...
+******************************************
+
+Node.js frameowrk has ability to work with both 
+relational and Non-relational database
+
+mongoDB & MySQL
+***************
+
+- ability of these non-relational database
+to store any sort of contetn in any
+sort of format is what makes these databases so famous
+
+for using mongoDB, the required module
+to be installed is "Mongoose"
+
+With these modules, you can perform following operaitons in Node.js
+1) Manage the connection pooling
+
+2) Create & close connection to a database 
+
+3) queries can be executed to get data from respective database to retrieve data
+
+4) Data manipulation such as inserting data,
+deleting and updating data can also be achieved with these modules
+
+
+
+USING MONGODB & NODE.js
+************************
+
+How can we establish connections with a MongoDB database?
+
+How can we perform normal operations of reading data from
+a database, inert, update, delete record in a mongoDB database?
+
+For chapter purpose assume:
+>>> Have EmployeeDB database
+
+Documents
+{
+	{Employeeid : 1, Employee Name : Guru99},
+	{Employeeid : 2, Employee Name : Joe},
+	{Employeeid : 3, Employee Name : Martin},
+}
+
+
+
+1. Installing the NPM modules
+*****************************
+
+To access Mongo from within node app, a
+driver is required, there are number of mongo drivers
+available, but MongoDB among the most popular
+
+"npm install mongodb"
+
+
+2. Creating & Closing connection to MongoDB database
+*****************************************************
+
+var MongoClient = require('mongodb').MongoClient; // using the mongodb driver
+var url = 'mongodb://localhost/EmployeeDB'; // specify connection url
+
+// connecting to db
+MongoClient.connect(url, function(err, db) {
+  console.log("Connected...");
+  db.close(); // closing the database connection
+});
+
+
+CODE EXPLANATION....
+1. include mongoose module done through the require function
+
+2. specify connection string to dataabse, 3 key values
+
+a) mongodb specifies that we are connecting to a mongoDB database
+b) localhost means we are connecting to a database on localmachine
+c) EmployeeDB is name of database defined in our MongoDB database
+
+3. actually connect to our db
+
+callback will be called when connection is opened to the db...
+
+
+
+3. QUERYING FOR DATA IN  A MONGODB DB
+***************************************
+
+Using mongoDB driver, we can also fetch data from the mongoDB database
+
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost/EmployeeDB';
+
+MongoClient.connect(url, function(err, db) {
+  var cursor = db.collection('Employee').find();
+  cursor.each(function(err, doc) {
+    console.log(doc);
+  });
+});
+
+CODE EXPLANATION....
+1. Create a cursor (pointer used to point to various records fetched from a database
+which is then used to iterate through diff records in db
+
+here curosr stores pointer to records which are fetched from database
+
+Also specify collection 'Employee' from which to fetch the records
+
+2. Now iterating throguh our cursor for each doc in cursor we are going to execute a function
+
+3. Func simple logs contents of eahc doc to console.
+
+
+DATABASE VS. COLLECTION
+*********************
+
+MongoDB stores BSON documents(i.e data records) in collections; the collections in databases
+
+Essentially, in MongoDB, databases hold collections of documents
+
+*********************
