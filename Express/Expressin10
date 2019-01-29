@@ -1,0 +1,50 @@
+Node.js Express - 10 min tutorial
+reference: https://www.guru99.com/node-js-express.html
+---------------------------------------------------
+>>> Minimal, flexible, node.js web app framework
+
+What is express.js?
+---------------------------------------------------
+
+- Node.js web app server framework
+- designed for SPA, multi-page, hybrid apps
+- MEAN stack (Mongo, Express, Angular, Node.js)
+- MongoDB >> Standard NoSQL database
+- Node.js >> Framework used for scalabe server-side and networking applications
+
+
+- Express makes it easy to develop app which can handle get, put, post, delete requests
+
+Installing and Using Express
+---------------------------------------------------
+
+- installed via NPM
+- "npm install express"
+- helloworld.js
+
+
+
+
+What are Routes?
+---------------------------------------------------
+
+Routing refer to determining way in which the
+application repsonsed to client request
+for a particular endpoint
+
+localhost:3000/books
+localhost:3000/students
+
+based on the url which is accessed, a diff
+functionality on the web server will be invoked
+and accordingly the repsonse will be sent to the client
+
+
+general syntax for a route is...
+
+app.METHOD(PATH, HANDLER);
+1) app is an instance of the express module
+2) method is http request method(get, post,put,delete)
+3) path is path on the server
+4) handler is function executed when route is matched
+
