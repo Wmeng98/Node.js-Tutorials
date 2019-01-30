@@ -108,7 +108,7 @@ here curosr stores pointer to records which are fetched from database
 
 Also specify collection 'Employee' from which to fetch the records
 
-2. Now iterating throguh our cursor for each doc in cursor we are going to execute a function
+2. Now iterating through our cursor for each doc in cursor we are going to execute a function
 
 3. Func simple logs contents of eahc doc to console.
 
@@ -121,3 +121,172 @@ MongoDB stores BSON documents(i.e data records) in collections; the collections 
 Essentially, in MongoDB, databases hold collections of documents
 
 *********************
+
+
+
+4. Intersting documents in a collection
+***************************************
+
+documents can  also be inserted into a collection
+using the insertOne method provided by mongoDB library
+
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost/EmployeeDB';
+
+MongoClient.connect(url, function(err, db) {
+  db.collection('Employee').insertOne({ // use insert method to insert a document
+    
+    // The document to insert in the collection  
+    Employeeid: 4,
+    EmployeeName: 'NewEmployee'
+    // document...
+  
+  });
+
+});
+
+
+
+CODE EXPLANATION....
+1. Here we using the insertOne method from MongoDB library to insert
+a document into the employee collection
+
+2. We are specifying the document details of what needs to be inserted into
+the Employee collection
+
+check contents of MongoDB will find record with the document details in Employee collection
+
+
+>>> To check data has been propery inserted into db execute following commands...
+1. Use EmployeeDB // ensure you connected to EmployeeDB
+2. db.Employee.find({Employeeid: 4}) // searches for record
+
+
+5. Updating Documents In A Collection
+***************************************
+
+var MongoClient = require('mongodb').MongoClient
+var url = 'mongodb://localhost/EmployeeDB';
+
+MongoClient.connect(url, function(err, db) {
+  db.collection('Employee').updateOne(
+    {"EmployeeName" : "NewEmployee"},
+    {
+      $set: {"EmployeeName: "Mohan"}
+    }
+  });
+});
+
+
+CODE EXPLANATION....
+1. Here using the updateOne method from MongoDB library
+2. We are specifying search criteria for which doc
+needs to be updated. In our case, we want to find document which has
+EmployeeName of "NewEmplyoee"
+
+3. Set value of EmployeeName of doc from "NewEmplyoee" to "Mohan"
+
+
+6. Deleting Documents In A Collection
+***************************************
+
+deleteOne method
+
+var MongoClient = reuqire('mongodb').MongoClient;
+var url = 'mongodb://localhoist/EmployeeDB';
+
+MongoClient.connect(url, function(err, db) {
+  db.collection('Employee').deleteOne(
+    {
+      "EmployeeName" : "Mohan" // search criteria for which record needs to be deleted
+    }
+  );
+});
+
+
+
+
+
+
+
+*************************************************************************
+HOW TO BUILD A NODE EXPRESS APP WITH MONGODB TO STORE AND SERVER CONTENT
+*************************************************************************
+
+express and mongoDB quite common nowadays
+
+simple ex making use of same Employee collection in the MongoDB EmployeeDB database
+
+
+incorporate express to display data on our web page when requested by the user
+
+http://localhost:3000/Employeeid // display all employee id in the employee collection
+
+STEPS....
+
+////////////////////////////////////////////////
+1) Define all libraries which need be used in our application
+mongoDB and express library in this case...
+
+var express = require('express'); // use express module
+var app = express();
+var MongoClient = require('mongodb').MongoClient; // using mongodb module
+
+var url = 'mongodv://localhost/EmployeeDB'; // create connection string
+
+var str=""; // creating a variable which will be used in our application
+// stores collection of employee id which need to be displayed in browser later...
+
+
+////////////////////////////////////////////////
+2) Get all of the records in our 'Employee' collection and work with them accoridng
+
+app.route('/Employeeid').get(function(req, res) { // create a route for our application
+  MongoClient.connect(url, function(err, db) {
+    var cursor = db.collection('Employee').find();
+
+    cursor.each(function(err, item) {
+      if (item != null) {
+        str = str + "&nbsp;&nbsp;&nbsp;&nbsp;Employee id&nbsp;&nbsp;"
+        + item.Employeeid + "</br>;
+      }
+    });
+  }); 
+});
+
+
+
+////////////////////////////////////////////////
+3.) Send our output to webpage and make web application listen on particular port
+
+
+
+
+app.route('/Employeeid').get(function(req, res) { // create a route for our application
+
+  MongoClient.connect(url, function(err, db) {
+    var cursor = db.collection('Employee').find();
+
+    cursor.each(function(err, item) {
+      if (item != null) {
+        str = str + "&nbsp;&nbsp;&nbsp;&nbsp;Employee id&nbsp;&nbsp;"
+        + item.Employeeid + "</br>;
+      }
+    });
+
+      // send content of str variable into web page
+      res.send(str);
+
+      // Global vs. Local javascript variables
+      global is whatever is not inside a function
+
+      //global can be used in all functions in program
+      // This also applies to c++ language as well
+
+  }); 
+});
+
+// sMake server listen on port 3000
+var server = app.listen(3000, function(){});
+
+////////////////////////////////////////////////
