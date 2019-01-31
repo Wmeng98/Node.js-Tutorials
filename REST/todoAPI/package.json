@@ -1,0 +1,19 @@
+{
+  "name": "todoapi",
+  "version": "1.0.0",
+  "description": "RESTful todo api",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "olatunde garuba (tutorial)",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.8"
+  }
+}

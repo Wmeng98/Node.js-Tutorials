@@ -1,0 +1,104 @@
+Build Node.js RESTful APIs in 10 minutes... (Olatunde Garuba)
+*********************************************
+
+
+GETTING STARTED
+*********************************************
+
+Toold: Node,js, MongoDB, POSTMAN
+
+
+1. mkdir projectFolder
+2. npm init >>> create package.json file
+  index.js (like app.module.ts)
+
+3. create file called server.js
+4. mkdir api
+   mkdir api/controllers
+   mkdir api/models
+   mkdir api/routes
+
+5. todoController.js in api/controllers
+   todoRoutes.js in api/routes
+   todoModel.js in api/models
+
+6. SERVER SETUP
+
+> install express (used to create server) and nodmon (keep track of changes to application by watching changes to files and auto-restarting the server)
+>>> npm install --save-dev nodemon
+>>> npm install express --save
+
+Upon succesful installatin, package.json file will be modified to have 2 newly installed packages
+
+>>> open package.json and add task to script
+        "start": "nodemone server.js"
+
+7. Set up express server in server.js (listen on port 3000)
+
+
+
+SETTING UP THE SCHEMA
+*********************************************
+
+1. Install mongoose - npm install mongoose --save
+
+  Mongoose what we use to interact with MongoDB(Database) instance
+  Mongoose is a MongoDB object modelling tool designed to work in an asyncrhonous environment
+
+
+2. Open up todoModel 
+   create model of how our collection should look like
+
+   "use strict"; // at top of code/function
+    JS is evaluated in strict mode, more errors, effort to make code more robust, readable, accurate
+
+
+SETTING UP THE ROUTES
+*********************************************
+// Routing refers to determining how an application responds to a client
+// request for a specific endpoint, which is a URl (or path) and a specific
+// HTTP request method
+
+// Below, we define 2 basic routes ('/tasks', '/tasks/taskId') with different mathods
+
+ 
+SETTING UP THE CONTROLLER
+*********************************************
+
+// In this controller, we would be writing 5 different functions
+
+// We will export each of functions for us to use in our routes
+
+// Each func use diff mongoose methods such as...
+- findbyId
+- findoneAndUpdate
+- save
+- remove
+
+
+PUTTING EVERYTHING TOGETHER
+*********************************************
+
+This section, we connect our handlers(controllers), database,
+ the created models, body parser, and the create routes TOGETHER
+
+IN SERVER.JS FILE...
+1.) Connect your db by adding url to mongoose instance connection
+2.) Load the created model - task
+3.) Install bodyparser and use
+
+    bodyParser Parse incoming request bodies in a middleware before your handlers, available under req.body.property
+    All middlewares will populate the req.bodyproperty with the parsed body, or an empty object({}) if
+    there was no body to parse (or an error was returned)
+
+4.) register our created routes in the server
+
+
+
+
+
+
+
+
+
+
